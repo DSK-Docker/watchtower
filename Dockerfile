@@ -1,15 +1,9 @@
-FROM containrrr/watchtower:1.4.0
+FROM alpine:3.15
 
 LABEL maintainer "Dschinghis Kahn"
 
-####################################################
-######### INSTALLING BASE STUFF          ###########
-####################################################
-RUN apk add --no-cache procps
-
-####################################################
-######### CLEANUP                        ###########
-####################################################
-RUN rm -rf /tmp/* /root/.cache
+COPY --from=containrrr/watchtower:1.4.0 /watchtower /
 
 HEALTHCHECK CMD pidof watchtower || exit 1
+
+ENTRYPOINT ["/watchtower"]
