@@ -10,6 +10,8 @@ on:
 jobs:
   call-from-workflows:
     uses: DSK-Docker/workflows/.github/workflows/main.yml@master
+    with:
+      docker-run-config: docker run --volume /var/run/docker.sock:/var/run/docker.sock:ro
     secrets:
       DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
       DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
